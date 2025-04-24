@@ -1,0 +1,20 @@
+{
+  "name": "55-first-r3f-application",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "",
+    "vite": "",
+    "vite-plugin-restart": ""
+  },
+  "dependencies": {
+    "react": "",
+    "react-dom": "",
+    "three": "",
+    "@react-three/fiber": ""
+  }
+}
