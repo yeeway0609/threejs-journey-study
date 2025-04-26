@@ -8,9 +8,12 @@ const root = ReactDOM.createRoot(document.querySelector("#root"))
 
 root.render(
   <Canvas
+    // orthographic
+    dpr={[1, 2, 3]}
     gl={{
       antialias: true,
       toneMapping: THREE.ACESFilmicToneMapping,
+      // toneMapping: THREE.CineonToneMapping,
       // outputColorSpace: THREE.SRGBColorSpace
     }}
     camera={{
