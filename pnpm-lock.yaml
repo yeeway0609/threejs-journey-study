@@ -15,6 +15,9 @@ overrides:
   '@react-three/drei': ^10.0.4
   leva: 0.10.0
   r3f-perf: ^7.2.3
+  '@theatre/core': ~0.7.2
+  '@theatre/r3f': ~0.7.2
+  '@theatre/studio': ~0.7.2
 
 importers:
 
@@ -115,6 +118,40 @@ importers:
       '@react-three/fiber':
         specifier: ^9.1.0
         version: 9.1.2(@types/react@19.1.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(three@0.174.0)
+      react:
+        specifier: '19.0'
+        version: 19.0.0
+      react-dom:
+        specifier: '19.0'
+        version: 19.0.0(react@19.0.0)
+      three:
+        specifier: ^0.174.0
+        version: 0.174.0
+    devDependencies:
+      '@vitejs/plugin-react':
+        specifier: '4.3'
+        version: 4.3.4(vite@6.3.2)
+      vite:
+        specifier: ^6.2.2
+        version: 6.3.2
+      vite-plugin-restart:
+        specifier: ^0.4.2
+        version: 0.4.2(vite@6.3.2)
+
+  apps/theatre.js:
+    dependencies:
+      '@react-three/fiber':
+        specifier: ^9.1.0
+        version: 9.1.2(@types/react@19.1.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(three@0.174.0)
+      '@theatre/core':
+        specifier: ~0.7.2
+        version: 0.7.2
+      '@theatre/r3f':
+        specifier: ~0.7.2
+        version: 0.7.2(@react-three/fiber@9.1.2(@types/react@19.1.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(three@0.174.0))(@theatre/core@0.7.2)(@theatre/studio@0.7.2(@theatre/core@0.7.2))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(three@0.174.0)
+      '@theatre/studio':
+        specifier: ~0.7.2
+        version: 0.7.2(@theatre/core@0.7.2)
       react:
         specifier: '19.0'
         version: 19.0.0
@@ -662,6 +699,27 @@ packages:
     peerDependencies:
       react: '19.0'
 
+  '@theatre/core@0.7.2':
+    resolution: {integrity: sha512-IDQa/6WY7mIJAtsSd4EgNcM0IUZkl+FrqZ8DdYiCVTFap9ARDNmrngJOeFjJOsnnaHlc5GdEB/jj7fsjbIrAzQ==}
+
+  '@theatre/dataverse@0.7.2':
+    resolution: {integrity: sha512-YyfoyX7EyhFUY2OM5fsM0LPrs1SdgLwpiTMkkvTIoZLdOwvQhstjYq4Yz/8ZncJlRoTWvakfmgvCaBN+QuBYxg==}
+
+  '@theatre/r3f@0.7.2':
+    resolution: {integrity: sha512-HpBA40F5WMFlUITQjBNX+O2WzwKTx6aRbxkl2iB2UDtq7aqxr1L3beBXL/s7uJIFiT51JNOuw5Mvwf3ZeO+KCQ==}
+    peerDependencies:
+      '@react-three/fiber': ^9.1.0
+      '@theatre/core': ~0.7.2
+      '@theatre/studio': ~0.7.2
+      react: '19.0'
+      react-dom: '19.0'
+      three: ^0.174.0
+
+  '@theatre/studio@0.7.2':
+    resolution: {integrity: sha512-p6LTKzJWVlcHkpGzIlNHh9AkGbB3E+0q9Pjxv+OJoTDe1IK+CMKW695Wp+1//lB4vfC9qShe4z/p+Zaj1q8KtA==}
+    peerDependencies:
+      '@theatre/core': ~0.7.2
+
   '@tweenjs/tween.js@23.1.3':
     resolution: {integrity: sha512-vJmvvwFxYuGnF2axRtPYocag6Clbb5YS7kLL+SO/TeVFzHqDIWrNKYtcsPMibjDx9O+bu+psAy9NKfWklassUA==}
 
@@ -929,6 +987,9 @@ packages:
 
   lie@3.3.0:
     resolution: {integrity: sha512-UaiMJzeWRlEujzAuw5LokY1L5ecNQYZKfmyZ9L7wDHb/p5etKaxXhohBcrw0EYby+G/NA52vRSN4N39dxHAIwQ==}
+
+  lodash-es@4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
 
   loose-envify@1.4.0:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
@@ -1793,6 +1854,28 @@ snapshots:
     dependencies:
       react: 19.0.0
 
+  '@theatre/core@0.7.2':
+    dependencies:
+      '@theatre/dataverse': 0.7.2
+
+  '@theatre/dataverse@0.7.2':
+    dependencies:
+      lodash-es: 4.17.21
+
+  '@theatre/r3f@0.7.2(@react-three/fiber@9.1.2(@types/react@19.1.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(three@0.174.0))(@theatre/core@0.7.2)(@theatre/studio@0.7.2(@theatre/core@0.7.2))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(three@0.174.0)':
+    dependencies:
+      '@react-three/fiber': 9.1.2(@types/react@19.1.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(three@0.174.0)
+      '@theatre/core': 0.7.2
+      '@theatre/studio': 0.7.2(@theatre/core@0.7.2)
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+      three: 0.174.0
+
+  '@theatre/studio@0.7.2(@theatre/core@0.7.2)':
+    dependencies:
+      '@theatre/core': 0.7.2
+      '@theatre/dataverse': 0.7.2
+
   '@tweenjs/tween.js@23.1.3': {}
 
   '@types/babel__core@7.20.5':
@@ -2059,6 +2142,8 @@ snapshots:
   lie@3.3.0:
     dependencies:
       immediate: 3.0.6
+
+  lodash-es@4.17.21: {}
 
   loose-envify@1.4.0:
     dependencies:
