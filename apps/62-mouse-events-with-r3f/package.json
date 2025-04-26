@@ -1,0 +1,21 @@
+{
+  "name": "57-debug-a-r3f-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "",
+    "vite": "",
+    "vite-plugin-restart": ""
+  },
+  "dependencies": {
+    "react": "",
+    "react-dom": "",
+    "three": "",
+    "@react-three/fiber": "",
+    "@react-three/drei": ""
+  }
+}
