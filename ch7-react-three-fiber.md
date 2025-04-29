@@ -34,7 +34,8 @@ If you check the SphereGeometry class documentation, the first 3 parameters are:
 - `widthSegments`
 - `heightSegments`
 
-We can change the constructor parameters by providing an array to the ~args~ attribute and follow the parameters order (`radius`, `widthSegments`, `heightSegments`):
+We can change the constructor parameters by providing an array to the ~args~ attribute and follow the
+parameters order (`radius`, `widthSegments`, `heightSegments`):
 
 要注意時常更新 geometry 參數的話，他會一直被 rebuilt，所以會有效能問題
 
@@ -67,7 +68,8 @@ We are going to use a reference (`useRef`)
 
 ### OrbitControls
 
-We are now able to use <orbitControls> inside our JSX, but let’s not forget that we need to send the camera and the DOM element to it.
+We are now able to use <orbitControls> inside our JSX, but let’s not forget that we need to send the
+camera and the DOM element to it.
 
 But where can we find those?
 
@@ -75,15 +77,18 @@ If you remember from earlier, we found them in the state variable when we used u
 
 But we don’t want to get the state on each frame; we want it once when everything is ready.
 
-We can do that with the `useThree` hook - will provide us the same state, but only once at the beginning of the component.
+We can do that with the `useThree` hook - will provide us the same state, but only once at the beginning
+of the component.
 
 ### Optimize vertices with useMemo
 
 It’s working, but we made a mistake. CustomObject function 的程式碼會在 component 每次需要重新繪製時被呼叫
 
-我們不希望每次 props 或 state 變化時都重新計算整個幾何體（範例不會，但以後可能會）。我們現在只有 10 個三角形，但我們可能會有成千上萬個三角形。
+我們不希望每次 props 或 state 變化時都重新計算整個幾何體（範例不會，但以後可能會）。我們現在只有 10 個三角形，但我們可能會
+有成千上萬個三角形。
 
-useMemo 是一個 React hook，我們可以傳遞一個函數給它。它會呼叫該函數並記住該值。如果組件被 re-render，useMemo 會 return 它第一次呼叫函數時得到的值。它的作用有點像 cache。
+useMemo 是一個 React hook，我們可以傳遞一個函數給它。它會呼叫該函數並記住該值。如果組件被 re-render，useMemo 會 return
+它第一次呼叫函數時得到的值。它的作用有點像 cache。
 
 我們也可以指定成變數，如果這些變數改變了，useMemo 會忘記已保存的值並再次呼叫該函數。
 
@@ -95,6 +100,24 @@ useMemo 是一個 React hook，我們可以傳遞一個函數給它。它會呼�
 - OUtput color space
 - Alpha
 - Pixel Ratio
+
+## 58. Environment and Staging
+
+1. Bg Color
+   - 使用 setClearColor，我們需要存取 renderer，並且只需要在建立 renderer 時執行一次此操作，因為我們顯然不需要在每個 frame
+     都重新設置背景顏色。
+2. Light
+3. Shadow
+   - Baking: 只會初始渲染一次，然後將陰影儲存到 texture 中，提升效能。但是這樣對於正在旋轉的方塊，影子就不會動了
+   - Shadow map：一種從光源角度生成深度貼圖，用來即時計算場景中哪些區域應呈現陰影的技術。
+   - Soft shadow：使用 PCF（Percentage Closer Filtering）技術來模擬柔和的陰影邊緣，根據光源的大小和距離，陰影邊緣會變得模糊，
+     這樣可以減少硬邊陰影帶來的生硬感。
+   - AccumulativeShadows
+4. Sky
+5. Environment map
+   - HDRI: High Dynamic Range Imaging，能夠捕捉更廣泛的亮度範圍，提供更真實的光照效果。
+6. Stage
+   - 啥都懶得用，就用這個
 
 ## 62. Mouse events
 
@@ -143,3 +166,20 @@ console.log("metaKey", event.metaKey) // 按著 command 鍵
 - cheese
 - meat
 - bottomBun
+
+### Performance
+
+1.  meshBounds
+
+    會在 mesh 周圍建立一個理論上的球體（稱為 bounding sphere），滑鼠事件將會針對這個球體進行碰撞判定，而不是直接測試 mesh
+    的幾何形狀。這在不需要對複雜幾何進行精確偵測時非常有用。
+    我們將在 cube（立方體）上測試這個功能。需要注意的是，meshBounds 只能作用於單一 mesh，這也是為什麼我們無法將它用在 hamburger
+    （漢堡模型）上，因為它是由多個 mesh 組成的。
+
+2.  Bvh
+
+    如果有非常複雜的幾何形狀，又需要精準且高效的滑鼠事件偵測，也可以使用 BVH（Bounding Volume Hierarchy，包圍體階層結構）。
+    這是一種更複雜的做法，但透過 drei 提供的 <Bvh> 輔助工具可以簡化實作。由於 <Bvh> 輔助工具需要包裹整個場景（experience），
+    我們會將它加在 main.jsx 中。
+    唯一的缺點是：它需要為每個 Mesh 產生一棵 boundsTree（邊界樹），該結構會被 <Bvh> 在內部使用。這個過程每個 Mesh 只需執行一次，
+    但若幾何形狀過於複雜，仍可能造成短暫的卡頓（freeze）。
