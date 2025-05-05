@@ -10,6 +10,7 @@
       "vite": "^6.2.2",
       "@vitejs/plugin-react": "4.3",
       "vite-plugin-restart": "^0.4.2",
+      "gsap": "^3.12.7",
       "react": "19.0",
       "react-dom": "19.0",
       "three": "^0.174.0",

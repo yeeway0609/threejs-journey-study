@@ -1,0 +1,17 @@
+{
+  "name": "05-animations",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "vite": "",
+    "vite-plugin-restart": ""
+  },
+  "dependencies": {
+    "three": "",
+    "gsap": ""
+  }
+}
