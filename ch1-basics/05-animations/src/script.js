@@ -24,9 +24,24 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height)
 
 /** Animate */
-gsap.to(mesh.position, { duration: 1, delay: 1, x: 2 })
+// gsap.to(mesh.position, { duration: 1, delay: 1, x: 2 })
+
+let time = Date.now()
+const clock = new THREE.Clock()
 
 const tick = () => {
+  /** js 原生寫法 */
+  // const currentTime = Date.now()
+  // const deltaTime = currentTime - time
+  // time = currentTime
+  // mesh.rotation.y += 0.001 * deltaTime
+
+  /** three.js 寫法 */
+  // const collapsedTime = clock.getElapsedTime()
+  // mesh.rotation.y = collapsedTime
+  // mesh.position.y = Math.sin(collapsedTime)
+  // mesh.position.x = Math.cos(collapsedTime)
+
   renderer.render(scene, camera)
 
   window.requestAnimationFrame(tick)
