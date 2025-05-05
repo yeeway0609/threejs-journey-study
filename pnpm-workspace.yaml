@@ -1,2 +1,3 @@
 packages:
-  - "lessons/*"
+  - "ch1-basics/*"
+  - "ch7-react-three-fiber/*"
